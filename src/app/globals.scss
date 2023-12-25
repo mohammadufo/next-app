@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.side-container {
+  background-image: linear-gradient(to top, #d9c7ffb2, #ede4ffb2, #f3edffb2);
+}
+
+.custom-input-active {
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-primary);
+    display: flex;
+    margin: auto;
+    transition: all 0.03s ease;
+    animation: customInputAnimation 0.2s;
+  }
+}
+
+// .custom-input {
+//   position: relative;
+
+//   .input-title {
+//     position: absolute;
+//     color: #00000063;
+//     bottom: 0px;
+//     right: 6px;
+//   }
+
+//   .input-title-active {
+//     position: absolute;
+//     color: #000 !important;
+//     transition: all 0.2s ease;
+
+//     bottom: 25px !important;
+//     right: 0px !important;
+//   }
+// }
