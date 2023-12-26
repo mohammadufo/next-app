@@ -3,39 +3,26 @@
 @tailwind utilities;
 
 .side-container {
-  background-image: linear-gradient(to top, #d9c7ffb2, #ede4ffb2, #f3edffb2);
+  background-image: linear-gradient(
+    to top,
+    var(--color-bgColor1),
+    var(--color-bgColor2),
+    var(--color-bgColor3)
+  );
 }
 
-.custom-input-active {
-  &::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: var(--color-primary);
-    display: flex;
-    margin: auto;
-    transition: all 0.03s ease;
-    animation: customInputAnimation 0.2s;
+@keyframes showValidation {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-// .custom-input {
-//   position: relative;
-
-//   .input-title {
-//     position: absolute;
-//     color: #00000063;
-//     bottom: 0px;
-//     right: 6px;
-//   }
-
-//   .input-title-active {
-//     position: absolute;
-//     color: #000 !important;
-//     transition: all 0.2s ease;
-
-//     bottom: 25px !important;
-//     right: 0px !important;
-//   }
-// }
+.active-error {
+  animation: showValidation 0.3s;
+}

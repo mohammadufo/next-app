@@ -7,7 +7,7 @@ import { gateSchema } from '@/utils/validations'
 
 const GateWayForm = () => {
   const initialValue = {
-    title: '',
+    title: '1234567890',
     link: '',
     address: '',
     address2: '',
@@ -23,47 +23,55 @@ const GateWayForm = () => {
         }}
         validationSchema={gateSchema}
       >
-        {({ isSubmitting, values, setFieldValue }) => (
-          <Form>
-            <div className="flex flex-col items-center justify-center w-full">
-              <CustomInput
-                placeHolder="Alaa Majed 💕"
-                values={values}
-                name="title"
-              />
-              <CustomInput
-                placeHolder="Enter Payer's name"
-                values={values}
-                name="link"
-              />
-              <CustomInput
-                placeHolder="Enter Mobile number"
-                values={values}
-                name="address"
-              />
-              <CustomInput
-                placeHolder="Enter Email"
-                values={values}
-                name="address2"
-              />
-              <CustomInput
-                placeHolder="Description"
-                values={values}
-                name="description"
-                component="textarea"
-                row={3}
-              />
+        {({ isSubmitting, values, setFieldValue, errors }) => {
+          return (
+            <Form>
+              <div className="flex flex-col items-center justify-center w-full">
+                <CustomInput
+                  errors={errors}
+                  placeHolder="mamad"
+                  values={values}
+                  name="title"
+                  prepend="USD"
+                />
+                <CustomInput
+                  errors={errors}
+                  placeHolder="Enter Payer's name"
+                  values={values}
+                  name="link"
+                />
+                <CustomInput
+                  errors={errors}
+                  placeHolder="Enter Mobile number"
+                  values={values}
+                  name="address"
+                />
+                <CustomInput
+                  errors={errors}
+                  placeHolder="Enter Email"
+                  values={values}
+                  name="address2"
+                />
+                <CustomInput
+                  errors={errors}
+                  placeHolder="Description"
+                  values={values}
+                  name="description"
+                  component="textarea"
+                  row={3}
+                />
 
-              <button
-                className="w-full rounded-xl bg-primary py-4 text-white font-semibold"
-                type="submit"
-                disabled={isSubmitting}
-              >
-                payment
-              </button>
-            </div>
-          </Form>
-        )}
+                <button
+                  className="w-full rounded-xl bg-primary py-4 text-white font-semibold active:translate-y-1 transition-all"
+                  type="submit"
+                  disabled={isSubmitting}
+                >
+                  payment
+                </button>
+              </div>
+            </Form>
+          )
+        }}
       </Formik>
     </div>
   )
