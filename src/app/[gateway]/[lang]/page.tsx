@@ -6,7 +6,7 @@ const page = () => {
 
   return (
     <>
-      <div className=" mt-5 w-full ps-4 block md:hidden">
+      <div className="mt-5 w-full ps-4 block md:hidden">
         <div className="">
           <span className="text-caption text-sm">Product name:</span>{" "}
           <span className="text-title">Product2</span>
@@ -16,7 +16,7 @@ const page = () => {
           <span className="text-title">color,size</span>
         </div>
       </div>
-      <div className="w-full my-12 md:my-0 md:w-[667px] bg-slate-100 flex items-stretch md:rounded-[20px] md:shadow-2xl">
+      <div className="w-full my-8 mb-12 md:my-0 md:w-[667px] bg-slate-100 flex items-stretch md:rounded-[20px] md:shadow-2xl">
         <div className="w-0 md:w-[248px] side-container rounded-l-[20px] md:relative">
           <div className="w-full text-center mt-12 hidden md:block">
             <div className="">
