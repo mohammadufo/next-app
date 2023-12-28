@@ -1,9 +1,11 @@
 import * as Yup from 'yup'
 
 export const gateSchema = Yup.object().shape({
-  title: Yup.string().required('this field is required'),
-  link: Yup.string().required('this field is required'),
-  address: Yup.string().required('this field is required'),
-  address2: Yup.string().required('this field is required'),
+  amount: Yup.string().required('this field is required'),
+  name: Yup.string().required('this field is required'),
+  mobile: Yup.string().required('this field is required'),
+  email: Yup.string()
+    .required('this field is required')
+    .email('your email is not valid'),
   description: Yup.string().required('this field is required'),
 })

@@ -2,17 +2,30 @@
 
 import React from 'react'
 import CustomInput from '../custom-input'
-import { Form, Formik, useFormik } from 'formik'
-import { gateSchema } from '@/utils/validations'
+import { Form, Formik } from 'formik'
+import { useI18n } from '@/locales/client'
+import * as Yup from 'yup'
 
 const GateWayForm = () => {
   const initialValue = {
-    title: '1234567890',
-    link: '',
-    address: '',
-    address2: '',
+    amount: '1234567890',
+    name: '',
+    mobile: '',
+    email: '',
     description: '',
   }
+
+  const t = useI18n()
+
+  const gateSchema = Yup.object().shape({
+    amount: Yup.string().required(t('validations.required')),
+    name: Yup.string().required(t('validations.required')),
+    mobile: Yup.string().required(t('validations.required')),
+    email: Yup.string()
+      .required(t('validations.required'))
+      .email(t('validations.email')),
+    description: Yup.string().required(t('validations.required')),
+  })
 
   return (
     <div className="w-[80%]">
@@ -29,28 +42,28 @@ const GateWayForm = () => {
               <div className="flex flex-col items-center justify-center w-full">
                 <CustomInput
                   errors={errors}
-                  placeHolder="mamad"
+                  placeHolder={t('hello')}
                   values={values}
-                  name="title"
+                  name="amount"
                   prepend="USD"
                 />
                 <CustomInput
                   errors={errors}
                   placeHolder="Enter Payer's name"
                   values={values}
-                  name="link"
+                  name="name"
                 />
                 <CustomInput
                   errors={errors}
                   placeHolder="Enter Mobile number"
                   values={values}
-                  name="address"
+                  name="mobile"
                 />
                 <CustomInput
                   errors={errors}
                   placeHolder="Enter Email"
                   values={values}
-                  name="address2"
+                  name="email"
                 />
                 <CustomInput
                   errors={errors}

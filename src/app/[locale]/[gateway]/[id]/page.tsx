@@ -1,18 +1,25 @@
-import GateWay from "@/components/gate-way";
-import SvgIcon from "@/components/svg-icon/SvgIcon";
+import GateWay from '@/components/gate-way'
+import SvgIcon from '@/components/svg-icon/SvgIcon'
+import { getI18n } from '@/locales/server'
+import { Provider } from '@/providers/I18nProvider'
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 
-const page = () => {
-  const icons = ["telegram", "phone", "mail", "instagram"];
+const page = async ({ params }: { params: Params }) => {
+  console.log(params)
+
+  const icons = ['telegram', 'phone', 'mail', 'instagram']
+
+  const t = await getI18n()
 
   return (
     <>
       <div className="mt-5 w-full ps-4 block md:hidden">
         <div className="">
-          <span className="text-caption text-sm">Product name:</span>{" "}
-          <span className="text-title">Product2</span>
+          <span className="text-caption text-sm">Product name:</span>{' '}
+          <span className="text-title">{t('hello')}</span>
         </div>
         <div className="">
-          <span className="text-caption text-sm">Product Description:</span>{" "}
+          <span className="text-caption text-sm">Product Description:</span>{' '}
           <span className="text-title">color,size</span>
         </div>
       </div>
@@ -20,11 +27,11 @@ const page = () => {
         <div className="w-0 md:w-[248px] side-container rounded-l-[20px] md:relative">
           <div className="w-full text-center mt-12 hidden md:block">
             <div className="">
-              <span className="text-caption text-sm">Product name:</span>{" "}
+              <span className="text-caption text-sm">Product name:</span>{' '}
               <span className="text-title text-sm">Product1</span>
             </div>
             <div className="">
-              <span className="text-caption text-sm">Product Description:</span>{" "}
+              <span className="text-caption text-sm">Product Description:</span>{' '}
               <span className="text-title text-sm">color,size</span>
             </div>
           </div>
@@ -35,7 +42,9 @@ const page = () => {
           </div>
         </div>
         <div className="w-full h-full md:w-[67%] my-28 relative">
-          <GateWay />
+          <Provider locale={params.locale}>
+            <GateWay />
+          </Provider>
         </div>
       </div>
 
@@ -45,7 +54,7 @@ const page = () => {
         ))}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default page;
+export default page
