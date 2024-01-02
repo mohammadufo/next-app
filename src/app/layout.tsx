@@ -1,5 +1,6 @@
 import './globals.scss'
 import type { Metadata } from 'next'
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -11,12 +12,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode
+  params: Params
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div
+          className={`w-screen min-h-screen flex flex-col items-center justify-center bg-bg_primary relative ${
+            params?.locale === 'ar' || params?.locale === 'fa' ? 'rtl' : ''
+          }`}
+        >
+          {children}
+        </div>
+      </body>
     </html>
   )
 }

@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Logo from '@/assets/images/logo.png'
 
 const GateWay = () => {
-  console.log('hi')
   return (
     <div className="flex flex-col items-center justify-center h-full">
       <div className="absolute -top-[60px] left-[60px]">

@@ -5,7 +5,7 @@ import { Provider } from '@/providers/I18nProvider'
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 
 const page = async ({ params }: { params: Params }) => {
-  console.log(params)
+  console.log('params ------>', params)
 
   const icons = ['telegram', 'phone', 'mail', 'instagram']
 
