@@ -1,9 +1,10 @@
-import React from "react";
-import GateWayForm from "./GateWayForm";
-import Image from "next/image";
-import Logo from "@/assets/images/logo.png";
+import React from 'react'
+import GateWayForm from './GateWayForm'
+import Image from 'next/image'
+import Logo from '@/assets/images/logo.png'
 
 const GateWay = () => {
+  console.log('hi')
   return (
     <div className="flex flex-col items-center justify-center h-full">
       <div className="absolute -top-[60px] left-[60px]">
@@ -11,7 +12,7 @@ const GateWay = () => {
       </div>
       <GateWayForm />
     </div>
-  );
-};
+  )
+}
 
-export default GateWay;
+export default GateWay
