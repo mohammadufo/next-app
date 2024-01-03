@@ -17,8 +17,12 @@ const customColors = {
   bgColor1: '#D9C7FFB2',
   bgColor2: '#EDE4FFB2',
   bgColor3: '#F3EDFFB2',
-  bg_light: '#F4F8F9',
+  bg_success: '#F4F8F9',
+  bg_warning: '#FFB82A17',
+  bg_danger: '#FF5D5D17',
+  danger: '#FF5D5D',
   success: '#29A574',
+  warning: '#FFB82A',
 }
 
 module.exports = {

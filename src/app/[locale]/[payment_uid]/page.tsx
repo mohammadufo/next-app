@@ -6,16 +6,35 @@ import Icons from '@/components/shared/Icons'
 
 const page = ({ params }: { params: Params }) => {
   const icons = ['phone', 'mail', 'instagram']
+  const status = 'mismatch'
   return (
     <div className="w-screen md:w-[542px] bg-white md:rounded-[20px]">
       <div className="flex gap-2 items-center m-4">
         <Image alt="logo" src={Logo} width={82} height={20} />
         <span className="text-span text-xxs">Cryptocurrency payment</span>
       </div>
-      <div className="w-full bg-bg_light py-7 flex flex-col items-center justify-center gap-4">
+      <div
+        className={`w-full ${
+          status === 'success'
+            ? 'bg-bg_success'
+            : status === 'acceptable'
+            ? 'bg-bg_warning'
+            : 'bg-bg_danger'
+        } py-7 flex flex-col items-center justify-center gap-4`}
+      >
         <div className="flex flex-col items-center justify-center gap-1">
-          <SvgIcon name="success" />
-          <span className="text-success text-sm">Success</span>
+          <SvgIcon name={status} />
+          <span
+            className={`${
+              status === 'success'
+                ? 'text-success'
+                : status === 'acceptable'
+                ? 'text-warning'
+                : 'text-danger'
+            }  text-sm`}
+          >
+            {status}
+          </span>
         </div>
         <span className="text-black/60 text-base">
           30.00 USD paid Dec 31, 2023
@@ -65,7 +84,7 @@ const page = ({ params }: { params: Params }) => {
         </div>
 
         <div className="my-4 w-full flex items-center justify-between">
-          <span>+9823476891</span>
+          <span>+98234768912</span>
           <div>
             <Icons IconArray={icons} />
           </div>

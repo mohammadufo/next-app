@@ -132,6 +132,54 @@ const SvgIcon: FC<LoadSvgIconProps> = ({
             />
           </svg>
         )
+      case 'acceptable':
+        return (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="38"
+            height="37"
+            viewBox="0 0 38 37"
+            fill="none"
+          >
+            <circle cx="19" cy="18.5" r="18.5" fill="#FFB82A" />
+            <path
+              d="M9.5 19.4548L15.0459 25.0007"
+              stroke="white"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+            <path
+              d="M15.4004 25L28.4004 12"
+              stroke="white"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+          </svg>
+        )
+      case 'mismatch':
+        return (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="38"
+            height="37"
+            viewBox="0 0 38 37"
+            fill="none"
+          >
+            <circle cx="19" cy="18.5" r="18.5" fill="#FF5D5D" />
+            <path
+              d="M12 12L25 25"
+              stroke="white"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+            <path
+              d="M12 25L25 12"
+              stroke="white"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+          </svg>
+        )
       case 'download':
         return (
           <svg
