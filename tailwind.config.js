@@ -5,14 +5,20 @@ const customColors = {
   primary: '#6519FF',
   secondary: '#ffdbdb',
   border: '#E3E3E3',
+  border_2: '##E9E9E9C7',
   title: '#121212',
+  title_2: '#4F4F4F',
   caption: '#B8B8B8',
+  span: '#8F8F8F',
+  span_2: '#797979',
   orangeCu: '#fabb00',
   error: '#f06f5e',
   bg_primary: '#E7E7F7',
   bgColor1: '#D9C7FFB2',
   bgColor2: '#EDE4FFB2',
   bgColor3: '#F3EDFFB2',
+  bg_light: '#F4F8F9',
+  success: '#29A574',
 }
 
 module.exports = {

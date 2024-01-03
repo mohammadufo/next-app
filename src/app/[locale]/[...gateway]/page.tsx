@@ -1,4 +1,5 @@
 import GateWay from '@/components/gate-way'
+import Icons from '@/components/shared/Icons'
 import SvgIcon from '@/components/svg-icon/SvgIcon'
 import { getI18n } from '@/locales/server'
 import { Provider } from '@/providers/I18nProvider'
@@ -36,9 +37,7 @@ const page = async ({ params }: { params: Params }) => {
             </div>
           </div>
           <div className="hidden absolute w-[130px] md:flex items-center gap-4 md:bottom-8 left-0 right-0 mx-auto text-center">
-            {icons.map((item, index) => (
-              <SvgIcon name={item} key={index} />
-            ))}
+            <Icons IconArray={icons} />
           </div>
         </div>
         <div className="w-full h-full md:w-[67%] my-28 relative">
@@ -49,9 +48,7 @@ const page = async ({ params }: { params: Params }) => {
       </div>
 
       <div className="flex absolute w-[130px] md:hidden items-center gap-4 bottom-2 left-0 right-0 mx-auto text-center">
-        {icons.map((item, index) => (
-          <SvgIcon name={item} key={index} />
-        ))}
+        <Icons IconArray={icons} />
       </div>
     </>
   )
