@@ -9,8 +9,6 @@ export const getPayment = async (name: string, id: string) => {
   )
   const data = await res.json()
 
-  console.log('data', data)
-
   if (res.ok) {
     return data
   } else {
