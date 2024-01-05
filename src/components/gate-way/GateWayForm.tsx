@@ -1,16 +1,23 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import CustomInput from '../custom-input'
 import { Form, Formik } from 'formik'
 import { useI18n } from '@/locales/client'
 import * as Yup from 'yup'
+import { IGateDetail } from '@/types'
+import { createPayment } from '@/service/gateway.service'
+import SvgIcon from '../svg-icon/SvgIcon'
+import { useRouter } from 'next/navigation'
 
-const GateWayForm = () => {
+const GateWayForm = ({ data }: { data: IGateDetail }) => {
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
+
   const initialValue = {
-    amount: '1234567890',
+    amount: data?.amount,
     name: '',
-    mobile: '',
+    phoneNumber: '',
     email: '',
     description: '',
   }
@@ -20,19 +27,43 @@ const GateWayForm = () => {
   const gateSchema = Yup.object().shape({
     amount: Yup.string().required(t('validations.required')),
     name: Yup.string().required(t('validations.required')),
-    mobile: Yup.string().required(t('validations.required')),
+    phoneNumber: Yup.string().required(t('validations.required')),
     email: Yup.string()
       .required(t('validations.required'))
       .email(t('validations.email')),
     description: Yup.string().required(t('validations.required')),
   })
 
+  const handleForm = async (values: any) => {
+    const body = {
+      amount: values?.amount,
+      payerInfo: {
+        name: values?.name,
+        phoneNumber: values?.phoneNumber,
+        email: values?.email,
+        description: values?.description,
+      },
+    }
+
+    try {
+      setLoading(true)
+      const res = await createPayment(body, data?.uuid)
+      setLoading(false)
+      router.push(
+        `/${data?.language?.toLowerCase()}/${res?.result?.paymentUid}`
+      )
+    } catch (err) {
+      setLoading(false)
+      console.log(err)
+    }
+  }
+
   return (
     <div className="w-[80%]">
       <Formik
         initialValues={initialValue}
-        onSubmit={async (values) => {
-          alert(JSON.stringify(values, null, 2))
+        onSubmit={(values) => {
+          handleForm(values)
         }}
         validationSchema={gateSchema}
       >
@@ -45,7 +76,7 @@ const GateWayForm = () => {
                   placeHolder={t('hello')}
                   values={values}
                   name="amount"
-                  prepend="USD"
+                  prepend={data?.currency?.name}
                 />
                 <CustomInput
                   errors={errors}
@@ -57,7 +88,7 @@ const GateWayForm = () => {
                   errors={errors}
                   placeHolder="Enter Mobile number"
                   values={values}
-                  name="mobile"
+                  name="phoneNumber"
                 />
                 <CustomInput
                   errors={errors}
@@ -75,11 +106,14 @@ const GateWayForm = () => {
                 />
 
                 <button
-                  className="w-full rounded-xl bg-primary py-4 text-white font-semibold active:translate-y-1 transition-all"
+                  className={`w-full rounded-xl ${
+                    loading ? '!bg-primary/70' : '!bg-primary'
+                  } flex items-center justify-center gap-1 py-4 text-white font-semibold active:translate-y-1 transition-all`}
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || loading}
                 >
-                  payment
+                  {loading ? <SvgIcon name="loading" color="#fff" /> : null}
+                  <span>CheckOut</span>
                 </button>
               </div>
             </Form>
@@ -91,28 +125,3 @@ const GateWayForm = () => {
 }
 
 export default GateWayForm
-
-{
-  /* 
-<Form>
-<CustomInput
-        name="title"
-        value={}
-        onChange={}
-      />
-      <CustomInput
-        name="link"
-        value={}
-        onChange={}
-      />
-      <CustomInput
-        name="address"
-        value={}
-        onChange={}
-      />
-
-      <button className="w-[60%] rounded-md bg-primary py-4" type="submit" disabled={isSubmitting}>
-        submit
-      </button>
-    </Form> */
-}

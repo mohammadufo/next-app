@@ -3,10 +3,30 @@ import Image from 'next/image'
 import Logo from '@/assets/images/logo.png'
 import SvgIcon from '@/components/svg-icon/SvgIcon'
 import Icons from '@/components/shared/Icons'
+import { getPaymentDetails } from '@/service/gateway.service'
+import { IPaymentDetails } from '@/types'
 
-const page = ({ params }: { params: Params }) => {
+const page = async ({ params }: { params: Params }) => {
+  const { result }: { result: IPaymentDetails } = await getPaymentDetails(
+    params?.payment_uid
+  )
+  console.log('payment info ---->', result)
+
+  const resultDate = new Date(result?.createdAt)
+
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  })
+
+  const formattedDate = formatter.format(resultDate)
+
   const icons = ['phone', 'mail', 'instagram']
-  const status = 'mismatch'
+  const status = 'success'
   return (
     <div className="w-screen md:w-[542px] bg-white md:rounded-[20px]">
       <div className="flex gap-2 items-center m-4">
@@ -44,10 +64,10 @@ const page = ({ params }: { params: Params }) => {
         <div className="flex w-full items-center justify-between py-4 border-b border-border_2/75">
           <span className="text-title_2 text-sm ">Date and Time:</span>
 
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-span_2">2023/12/31</span>
-            <span className="text-sm text-span_2">11:34:52</span>
-          </div>
+          {/* <div className="flex items-center gap-2"> */}
+          <span className="text-sm text-span_2">{formattedDate}</span>
+          {/* <span className="text-sm text-span_2">11:34:52</span> */}
+          {/* </div> */}
         </div>
         <div className="flex w-full items-center justify-between py-4 border-b border-border_2/75">
           <span className="text-title_2 text-sm ">Transaction ID:</span>
@@ -59,15 +79,21 @@ const page = ({ params }: { params: Params }) => {
         </div>
         <div className="flex w-full items-center justify-between py-4 border-b border-border_2/75">
           <span className="text-title_2 text-sm ">Product Name:</span>
-          <span className="text-sm text-span_2">Black Shirt</span>
+          <span className="text-sm text-span_2">
+            {result?.paylinkInfo?.title}
+          </span>
         </div>
         <div className="flex w-full items-center justify-between py-4 border-b border-border_2/75">
           <span className="text-title_2 text-sm ">Product Description:</span>
-          <span className="text-sm text-span_2">Size1, color1</span>
+          <span className="text-sm text-span_2">
+            {result?.paylinkInfo?.content}
+          </span>
         </div>
         <div className="flex w-full items-center justify-between py-4 border-b border-border_2/75">
           <span className="text-title_2 text-sm ">Gateways Name:</span>
-          <span className="text-sm text-span_2">Esmith</span>
+          <span className="text-sm text-span_2">
+            {result?.gateway?.info?.name}
+          </span>
         </div>
 
         <div className="flex w-full flex-col md:flex-row items-center justify-between my-4 gap-4 md:gap-1">
